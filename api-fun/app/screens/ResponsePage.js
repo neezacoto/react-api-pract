@@ -6,13 +6,22 @@ import appStyles from '../config/appStyles';
 function ResponsePage(props) {
         return (
             <ScrollView style={[appStyles.statusBar, styles.container]}>
-                  <InfoBox title="Header">hello bruh</InfoBox>
+                  <InfoBox title="Header">
+                    hello bruh
+                    im jojo
+                  </InfoBox>
             </ScrollView>
         );
 }
 
 const styles = StyleSheet.create({
-  container: {}
+    container: {
+        flex: 1,
+        paddingHorizontal: 15,
+        
+        paddingBottom: "10%"
+        
+      },
 
 })
 
