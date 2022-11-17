@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import axios from 'axios';
 import LandingPage from './app/screens/LandingPage';
+import ResponsePage from './app/screens/ResponsePage';
 
 export default function App() {
 
@@ -16,7 +17,7 @@ const getJokeAxios = async () => {
 }
 
   return (
-    <LandingPage />
+    <ResponsePage />
   );
 }
 

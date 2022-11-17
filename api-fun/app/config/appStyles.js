@@ -18,6 +18,12 @@ const appStyles = StyleSheet.create({
         white: "#fff",
         medium: "#888888",
 
+        get: "#035edb",
+        post: "#1898b2",
+        putPatch: "#ffb90d",
+        delete: "#d22d3b",
+        other: "#606a72",
+
         light: "#EEEEEE",
         dark: "#0c0c0c",
         danger:"#ff5252"
