@@ -14,7 +14,10 @@ function LandingPage(props) {
             <View style={[appStyles.statusBar,styles.container]}>
                   <AppText style={styles.header}> Axios Demo</AppText>
                   <View style={styles.buttonContainer}>
-                    <FlatList data={requestList} renderItem={renderButtons} keyExtractor={button => button.id}/>
+                    <FlatList 
+                    data={requestList} 
+                    renderItem={renderButtons} 
+                    keyExtractor={button => button.id}/>
                   </View>
             </View>
         );
@@ -39,6 +42,7 @@ const styles = StyleSheet.create({
     padding: 18,
     borderRadius: 12,
     backgroundColor: appStyles.themes.light,
+
   },
   buttons: {
     marginBottom: 15

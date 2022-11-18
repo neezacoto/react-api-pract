@@ -6,7 +6,6 @@ import AppText from './AppText';
 function AppButton({ title, style, color = "black", onPress, ...otherProps }) {
         return (
             <TouchableOpacity
-            delayPressIn={78}
             style={[styles.container, {backgroundColor: color}, style]}
             {...otherProps}
             onPress={onPress}
@@ -26,7 +25,17 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
-    alignItems: "center"
+    alignItems: "center",
+
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity:  0.18,
+    shadowRadius: 4.59,
+    elevation: 7
+
   },
   text: {
     color: "white",

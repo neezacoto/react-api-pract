@@ -25,8 +25,9 @@ const appStyles = StyleSheet.create({
         other: "#606a72",
 
         light: "#EEEEEE",
-        dark: "#0c0c0c",
+        dark: "#6D6D6D",
         danger:"#ff5252"
-    }
+    },
+
 })
 export default appStyles;
