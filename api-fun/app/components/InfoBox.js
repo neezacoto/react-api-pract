@@ -1,46 +1,78 @@
-import React, { useRef } from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, Animated } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { View, StyleSheet, TouchableWithoutFeedback, Animated, ScrollView } from 'react-native';
 import appStyles from '../config/appStyles';
 import AppText from './AppText';
 import { Entypo } from '@expo/vector-icons';
 
-
+const radius = 10
 function InfoBox({title, children, style, isOpen, onPress, ...otherProps}) {
     const slideAnim = useRef(new Animated.Value(0)).current
 
+    const [activated, setActivated] = useState(true)
+
+
     const openSlide = () => {
       onPress()
-      Animated.timing(
+      setActivated(false)
+      Animated.spring(
         slideAnim, 
         {
-          toValue: 1, duration: 1000, useNativeDriver: false
+          toValue: 1, duration: 250, useNativeDriver: false
         }
       ).start()
     }
 
+    const closeSlide = () => {
+      onPress()
+      Animated.timing(
+        slideAnim, 
+        {
+          toValue: 0, duration: 250, useNativeDriver: false
+        }
+      ).start()
+    }
+
+    const iconAnim = () => (
+    isOpen? {
+      transform: [{ rotateZ: slideAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange:['0deg', '180deg']
+      }) }], 
+      backgroundColor: appStyles.themes.dark
+    }:{
+      transform: [{ rotateZ: slideAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange:['0deg', '180deg']
+      }) }],
+    }
+    )
+
         return (
             <View 
             style={[style, styles.container,styles.shadow, isOpen && styles.openShadow]} {...otherProps}>
-              <TouchableWithoutFeedback 
-              
-              onPress={openSlide}>
-                <View style={[styles.titleContainer, isOpen && styles.titleOpen ]}>
+              <TouchableWithoutFeedback onPress={activated || !isOpen ? openSlide : closeSlide}>
+
+                <View style={[styles.titleContainer, isOpen? styles.titleOpen : null ]}>
                  <AppText style={styles.title}>{title}</AppText>  
 
-                 <View style={[styles.icon, isOpen && styles.iconOpen]}>
+                 <Animated.View style={[styles.icon, iconAnim()]}>
                     <Entypo name="chevron-down" size={30} color={appStyles.themes.light} />      
-                 </View>
+                 </Animated.View>
                 </View>
+
               </TouchableWithoutFeedback>
 
-                <Animated.View style={[styles.desc, {height: slideAnim.interpolate({
+                <Animated.ScrollView style={[styles.desc, {height: slideAnim.interpolate({
                   inputRange: [0, 1],
-                  outputRange:[0, 2000]
-                })}] }>
+                  outputRange:[0, 200]
+                }), marginBottom: slideAnim.interpolate({
+                  inputRange: [0, 1],
+                  outputRange:[0, 10]
+                }) }] }>
                     <AppText>
                         {children}
                     </AppText>
-                </Animated.View>
+                </Animated.ScrollView>
 
             </View>
         );
@@ -49,12 +81,12 @@ function InfoBox({title, children, style, isOpen, onPress, ...otherProps}) {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    borderRadius: 10,
+    borderRadius: radius,
     backgroundColor: appStyles.themes.light,
     
   },
   titleContainer: {
-    borderRadius: 10,
+    borderRadius: radius,
     flex: 1,
     flexDirection: "row",
     paddingHorizontal: 20,
@@ -77,10 +109,6 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     padding: 3,
     marginLeft: "auto"
-  },
-  iconOpen: {
-    transform: [{ rotateZ: "180deg" }], 
-    backgroundColor: appStyles.themes.dark
   },
   desc: {
     // padding: 15,
