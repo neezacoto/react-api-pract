@@ -1,31 +1,29 @@
-import React from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import React, { useRef } from 'react';
+import { View, StyleSheet, TouchableWithoutFeedback, Animated } from 'react-native';
 import appStyles from '../config/appStyles';
 import AppText from './AppText';
 import { Entypo } from '@expo/vector-icons';
 
-import { Transition, Transitioning } from 'react-native-reanimated'
-
-const transition = (
-  <Transition.Together>
-    <Transition.In type='fade' durationMs={200} />
-    <Transition.Change />
-    <Transition.Out  type='fade' durationMs={200} />
-  </Transition.Together>
-)
 
 function InfoBox({title, children, style, isOpen, onPress, ...otherProps}) {
-    const ref = React.useRef()
+    const slideAnim = useRef(new Animated.Value(0)).current
+
+    const openSlide = () => {
+      onPress()
+      Animated.timing(
+        slideAnim, 
+        {
+          toValue: 1, duration: 1000, useNativeDriver: false
+        }
+      ).start()
+    }
 
         return (
-
-            <Transitioning.View 
-            ref={ref}
-            transition={transition}
+            <View 
             style={[style, styles.container,styles.shadow, isOpen && styles.openShadow]} {...otherProps}>
               <TouchableWithoutFeedback 
               
-              onPress={() => console.log(onPress )}>
+              onPress={openSlide}>
                 <View style={[styles.titleContainer, isOpen && styles.titleOpen ]}>
                  <AppText style={styles.title}>{title}</AppText>  
 
@@ -35,13 +33,16 @@ function InfoBox({title, children, style, isOpen, onPress, ...otherProps}) {
                 </View>
               </TouchableWithoutFeedback>
 
-                <View style={[styles.desc, isOpen? {height: "auto", padding: 10} : {height: 0, padding: 0, marginBottom: 0}] }>
+                <Animated.View style={[styles.desc, {height: slideAnim.interpolate({
+                  inputRange: [0, 1],
+                  outputRange:[0, 2000]
+                })}] }>
                     <AppText>
                         {children}
                     </AppText>
-                </View>
+                </Animated.View>
 
-            </Transitioning.View>
+            </View>
         );
 }
 
@@ -82,11 +83,11 @@ const styles = StyleSheet.create({
     backgroundColor: appStyles.themes.dark
   },
   desc: {
-    padding: 15,
+    // padding: 15,
     backgroundColor: appStyles.themes.white,
     borderRadius: 10,
     marginHorizontal: 8,
-    marginBottom: 10
+    // marginBottom: 10,
   },
   shadow: {
     shadowColor: "#000000",

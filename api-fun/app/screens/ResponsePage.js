@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, FlatList, Easing } from 'react-native';
+import { View, StyleSheet, FlatList, Animated } from 'react-native';
 import AppText from '../components/AppText';
 import InfoBox from '../components/InfoBox';
 import appStyles from '../config/appStyles';
