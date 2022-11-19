@@ -5,10 +5,17 @@ import AppButton from '../components/AppButton';
 import AppText from '../components/AppText';
 import appStyles from '../config/appStyles';
 import requestList from '../data/requestList';
+import routes from '../Navigator/routes';
 
-function LandingPage(props) {
+function LandingPage({ navigation }) {
 
-    const renderButtons = ({ item }) => <AppButton style={styles.buttons} title={item.title} color={item.color} />
+    const renderButtons = ({ item }) => (
+    <AppButton 
+        style={styles.buttons} 
+        title={item.title} 
+        color={item.color} 
+        onPress={() => navigation.navigate(routes.RESP_SCREEN, item)}
+      />)
 
         return (
             <View style={[appStyles.statusBar,styles.container]}>

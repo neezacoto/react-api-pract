@@ -2,7 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import axios from 'axios';
 import LandingPage from './app/screens/LandingPage';
+import { NavigationContainer } from "@react-navigation/native";
 import ResponsePage from './app/screens/ResponsePage';
+import RequestNavigator from './app/Navigator/RequestNavigator';
 
 export default function App() {
 
@@ -17,7 +19,9 @@ const getJokeAxios = async () => {
 }
 
   return (
-    <ResponsePage />
+    <NavigationContainer>
+      <RequestNavigator />
+    </NavigationContainer>
   );
 }
 
