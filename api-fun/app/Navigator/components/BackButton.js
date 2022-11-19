@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
-import { getHeaderTitle } from '@react-navigation/elements'
 
 import routes from '../routes';
 
-function BackButton({ navigation, route, onPress, ...otherProps }) {
+function BackButton({ onPress }) {
         return (
 
                 <TouchableOpacity
@@ -16,10 +15,5 @@ function BackButton({ navigation, route, onPress, ...otherProps }) {
        
         );
 }
-
-const styles = StyleSheet.create({
-  container: {}
-
-})
 
 export default BackButton;

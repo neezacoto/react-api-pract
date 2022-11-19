@@ -1,5 +1,0 @@
-const responsesList = [
-    {
-        name: "Headers"
-    },
-]

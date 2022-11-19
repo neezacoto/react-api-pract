@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback, Animated, ScrollView } from 'react-native';
+import { Entypo } from '@expo/vector-icons';
+
 import appStyles from '../config/appStyles';
 import AppText from './AppText';
-import { Entypo } from '@expo/vector-icons';
 
 const radius = 10
 function InfoBox({title, children, style, isOpen, onPress, ...otherProps}) {
@@ -85,6 +86,44 @@ const styles = StyleSheet.create({
     backgroundColor: appStyles.themes.light,
     
   },
+  desc: {
+    // padding: 15,
+    backgroundColor: appStyles.themes.white,
+    borderRadius: 10,
+    marginHorizontal: 8,
+    // marginBottom: 10,
+  },
+  icon: {
+    backgroundColor: appStyles.themes.medium,
+    borderRadius: 100,
+    padding: 3,
+    marginLeft: "auto"
+  },
+  openShadow: {
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 3,
+      height: 5,
+    },
+    shadowOpacity:  0.28,
+    shadowRadius: 3.59,
+    elevation: 10
+  },
+  shadow: {
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity:  0.18,
+    shadowRadius: 1.59,
+    elevation: 6
+  },
+  title: {
+    fontWeight: "800",
+    marginRight: 50,
+    
+  },
   titleContainer: {
     borderRadius: radius,
     flex: 1,
@@ -99,44 +138,6 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0
   },
-  title: {
-    fontWeight: "800",
-    marginRight: 50,
-    
-  },
-  icon: {
-    backgroundColor: appStyles.themes.medium,
-    borderRadius: 100,
-    padding: 3,
-    marginLeft: "auto"
-  },
-  desc: {
-    // padding: 15,
-    backgroundColor: appStyles.themes.white,
-    borderRadius: 10,
-    marginHorizontal: 8,
-    // marginBottom: 10,
-  },
-  shadow: {
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity:  0.18,
-    shadowRadius: 1.59,
-    elevation: 6
-},
-openShadow: {
-  shadowColor: "#000000",
-  shadowOffset: {
-    width: 3,
-    height: 5,
-  },
-  shadowOpacity:  0.28,
-  shadowRadius: 3.59,
-  elevation: 10
-}
 
 })
 

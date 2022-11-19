@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import routes from './routes';
 import LandingPage from '../screens/LandingPage';
 import ResponsePage from '../screens/ResponsePage';
 import BackButton from './components/BackButton';
+import appStyles from '../config/appStyles';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,15 +28,17 @@ function RequestNavigator() {
                             onPress={() => navigation.goBack()}
                             />
                         ),
+                        headerTitleStyle: {
+                            fontSize: 24,
+                            fontWeight: "700",
+                            color: appStyles.themes.medium
+                        }
+                        
                     })} 
                 />
             </Stack.Navigator>
         );
 }
 
-const styles = StyleSheet.create({
-  container: {}
-
-})
 
 export default RequestNavigator;

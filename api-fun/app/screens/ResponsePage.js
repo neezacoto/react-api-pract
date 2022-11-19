@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, FlatList, Animated } from 'react-native';
+
 import AppText from '../components/AppText';
-import InfoBox from '../components/InfoBox';
 import appStyles from '../config/appStyles';
+import InfoBox from '../components/InfoBox';
 
 
 const responses = [
@@ -30,17 +31,17 @@ function ResponsePage({request}) {
     </InfoBox>
   )
         return (
-          <View style={[appStyles.statusBar,  styles.container ]}>
+          <View style={[  styles.container ]}>
             <View style={styles.textContainer}>
               <AppText style={styles.text}>Satus: </AppText>
               <AppText style={styles.status}>{data?.status || 404}</AppText>
             </View>
-
                  <FlatList 
                  style={styles.list}
                  data={responses} 
                  renderItem={renderData} 
                  keyExtractor={item => item}/>               
+
           </View>
         );
 }
@@ -49,10 +50,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 15,
+        marginTop: 10,
+      },
+      //do not add padding top or bottom, padding top to flatList breaks view
+      list: {
+        marginBottom: 40,
+        paddingHorizontal: 10,
+        marginTop: 20
+      },
+      responseBoxes: {
+        marginBottom:  20
+      },
+      status: {
+        fontSize: 35,
+        fontWeight: "800",
+        color: appStyles.themes.other
         
-        paddingBottom: "10%",
-
-
       },
       text: {
         fontSize: 30,
@@ -61,24 +74,11 @@ const styles = StyleSheet.create({
         color: appStyles.themes.medium
       },
       textContainer: {
-      flexDirection: "row",
+        flexDirection: "row",
         borderBottomWidth: 2,
         borderBottomColor: appStyles.themes.light,
         alignItems: "center"
       },
-      status: {
-        fontSize: 35,
-        fontWeight: "800",
-        color: appStyles.themes.other
-
-      },
-      list: {
-        paddingTop: "10%",
-        padding: 10
-      },
-      responseBoxes: {
-        marginBottom:  20
-      }
 
 })
 

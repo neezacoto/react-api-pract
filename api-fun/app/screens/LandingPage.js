@@ -31,6 +31,17 @@ function LandingPage({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  buttons: {
+    marginBottom: 15
+  },
+  buttonContainer: {
+    width: "100%",
+    flex: 1,
+    padding: 18,
+    borderRadius: 12,
+    backgroundColor: appStyles.themes.light,
+
+  },
   container: {
     flex: 1,
     paddingHorizontal: 15,
@@ -43,17 +54,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginBottom: 24
   },
-  buttonContainer: {
-    width: "100%",
-    flex: 1,
-    padding: 18,
-    borderRadius: 12,
-    backgroundColor: appStyles.themes.light,
-
-  },
-  buttons: {
-    marginBottom: 15
-  }
 
 })
 
