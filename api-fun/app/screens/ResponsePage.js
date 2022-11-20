@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, FlatList, Animated } from 'react-native';
+import { View, StyleSheet, FlatList, Animated, LogBox } from 'react-native';
+
+
+
 
 import AppText from '../components/AppText';
 import appStyles from '../config/appStyles';
@@ -14,9 +17,11 @@ const responses = [
 
 
 function ResponsePage({route}) {
+  LogBox.ignoreAllLogs()
   const [pressed, setPressed] = useState({})
   const {data, resp} = route.params
   const { status } = resp
+  
   console.log(status)
   const togglePressed = (detail) => {
     setPressed({
@@ -27,6 +32,7 @@ function ResponsePage({route}) {
 
   const renderData = ({ item }) => (
     <InfoBox isOpen={pressed[item]} title={item} style={styles.responseBoxes} onPress={()=> togglePressed(item)}>
+      
       {JSON.stringify(resp[item], null, 2)}
     </InfoBox>
   )
