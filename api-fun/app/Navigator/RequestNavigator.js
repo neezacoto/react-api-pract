@@ -23,6 +23,7 @@ function RequestNavigator() {
                     name={routes.RESP_SCREEN} 
                     component={ResponsePage}
                     options={({ navigation, route}) =>({
+                        title: route.params?.data.title,
                         headerLeft: () => (
                             <BackButton 
                             onPress={() => navigation.goBack()}

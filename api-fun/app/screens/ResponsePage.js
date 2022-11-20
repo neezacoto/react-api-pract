@@ -13,11 +13,11 @@ const responses = [
 ]
 
 
-function ResponsePage({request}) {
+function ResponsePage({route}) {
   const [pressed, setPressed] = useState({})
-  const data = request
-
-
+  const {data, resp} = route.params
+  const { status } = resp
+  console.log(status)
   const togglePressed = (detail) => {
     setPressed({
       ...pressed,
@@ -27,14 +27,14 @@ function ResponsePage({request}) {
 
   const renderData = ({ item }) => (
     <InfoBox isOpen={pressed[item]} title={item} style={styles.responseBoxes} onPress={()=> togglePressed(item)}>
-      {item}
+      {JSON.stringify(resp[item], null, 2)}
     </InfoBox>
   )
         return (
           <View style={[  styles.container ]}>
             <View style={styles.textContainer}>
-              <AppText style={styles.text}>Satus: </AppText>
-              <AppText style={styles.status}>{data?.status || 404}</AppText>
+              <AppText style={styles.text}> Status: </AppText>
+              <AppText style={styles.status}>{status || "Error"}</AppText>
             </View>
                  <FlatList 
                  style={styles.list}

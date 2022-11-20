@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
+import pracApi from '../api/pracApi';
 
 import AppButton from '../components/AppButton';
 import AppText from '../components/AppText';
@@ -14,7 +15,7 @@ function LandingPage({ navigation }) {
         style={styles.buttons} 
         title={item.title} 
         color={item.color} 
-        onPress={() => navigation.navigate(routes.RESP_SCREEN, item)}
+        onPress={() => { pracApi[item.title](navigation, routes.RESP_SCREEN, item)}}
       />)
 
         return (

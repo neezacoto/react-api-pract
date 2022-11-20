@@ -1,49 +1,50 @@
+import apiRoutes from "../api/apiRoutes";
 import appStyles from "../config/appStyles";
 
 const requestList = [
     {
         id: 1,
-        title: "GET",
+        title: apiRoutes.GET,
         color: appStyles.themes.get
     },
     {
         id: 2,
-        title: "POST",
+        title: apiRoutes.POST,
         color: appStyles.themes.post
     },
     {
         id: 3,
-        title: "PUT/PATCH",
+        title: apiRoutes.PUT_PATCH,   
         color: appStyles.themes.putPatch
     },
     {
         id: 4,
-        title: "DELETE",
+        title: apiRoutes.DELETE,
         color: appStyles.themes.delete
     },
     {
         id: 5,
-        title: "Sim Request",
+        title: apiRoutes.SIM_REQ,
         color: appStyles.themes.other
     },
     {
         id: 6,
-        title: "Custom Headers",
+        title: apiRoutes.CUSTOM_HEADERS,
         color: appStyles.themes.other
     },
     {
         id: 7,
-        title: "Transform",
+        title: apiRoutes.TRANSFORM,
         color: appStyles.themes.other
     },
     {
         id: 8,
-        title: "Error Handling",
+        title: apiRoutes.ERROR_HANDLING,
         color: appStyles.themes.other
     },
     {
         id: 9,
-        title: "Cancel",
+        title: apiRoutes.CANCEL,
         color: appStyles.themes.other
     },
 ]

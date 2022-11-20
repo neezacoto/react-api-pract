@@ -63,9 +63,9 @@ function InfoBox({title, children, style, isOpen, onPress, ...otherProps}) {
 
               </TouchableWithoutFeedback>
 
-                <Animated.ScrollView style={[styles.desc, {height: slideAnim.interpolate({
+                <Animated.ScrollView style={[styles.desc, {maxHeight: slideAnim.interpolate({
                   inputRange: [0, 1],
-                  outputRange:[0, 200]
+                  outputRange:[0, 400]
                 }), marginBottom: slideAnim.interpolate({
                   inputRange: [0, 1],
                   outputRange:[0, 10]
