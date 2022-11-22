@@ -98,16 +98,20 @@ function ResponsePage({route}) {
               <AppText style={styles.status}>{status || "Error"}</AppText>
             </View>
             {
-              Array.isArray(info)? (
-                
-                <FlatList 
-                  style={styles.list}
-                  data={info}
-                  renderItem={renderDisplay}
-                  keyExtractor={item => "resp" + item.id}
-                  />
+              (status >=400)? (
+                <AppText style={styles.error}>Request Failed</AppText>
               ) : (
-                createList()
+                Array.isArray(info)? (
+                  
+                  <FlatList 
+                    style={styles.list}
+                    data={info}
+                    renderItem={renderDisplay}
+                    keyExtractor={item => "resp" + item.id}
+                    />
+                ) : (
+                  createList()
+                )
               )
             
             }
@@ -122,6 +126,11 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 15,
         marginTop: 10,
+      },
+      error: {
+        fontSize: 40,
+        color: appStyles.themes.medium,
+        fontWeight: "800"
       },
       //do not add padding top or bottom, padding top to flatList breaks view
       list: {

@@ -68,7 +68,7 @@ function InfoBox({title, children, style, isOpen, onPress, isDisplay = false, ..
                   inputRange: [0, 1],
                   outputRange:[0, 10]
                 }) }] }>
-                    {!isDisplay? (<AppText> {children} </AppText>) : children }
+                    {!isDisplay? (<AppText onResponderGrant> {children} </AppText>) : children }
                 </Animated.ScrollView>
 
             </View>
