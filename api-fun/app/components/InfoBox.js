@@ -10,8 +10,6 @@ function InfoBox({title, children, style, isOpen, onPress, isDisplay = false, ..
     const slideAnim = useRef(new Animated.Value(0)).current
 
     const [activated, setActivated] = useState(true)
-
-    console.log("hi")
     const openSlide = () => {
       onPress()
       setActivated(false)
@@ -32,7 +30,7 @@ function InfoBox({title, children, style, isOpen, onPress, isDisplay = false, ..
         }
       ).start()
     }
-
+    const render = () => (<>{children}</>)
     const iconAnim = () => (
     isOpen? {
       transform: [{ rotateZ: slideAnim.interpolate({
@@ -65,12 +63,12 @@ function InfoBox({title, children, style, isOpen, onPress, isDisplay = false, ..
 
                 <Animated.ScrollView style={[styles.desc, {maxHeight: slideAnim.interpolate({
                   inputRange: [0, 1],
-                  outputRange:[0, 400]
+                  outputRange: isDisplay? [0, 2000] : [0, 400]
                 }), marginBottom: slideAnim.interpolate({
                   inputRange: [0, 1],
                   outputRange:[0, 10]
                 }) }] }>
-                    {!isDisplay? (<AppText> {children} </AppText>) : <AppText>ligma</AppText>}
+                    {!isDisplay? (<AppText> {children} </AppText>) : children }
                 </Animated.ScrollView>
 
             </View>

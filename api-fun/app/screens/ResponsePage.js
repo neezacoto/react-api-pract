@@ -15,9 +15,9 @@ const responses = [
   "config"
 ]
 
-
-
-
+//nested flatlist crazy inefficient, just wanted to prove I could do it, 
+//I don't see myself having the need to do this in the future
+//I intend to use flashlists in the future
 function ResponsePage({route}) {
   LogBox.ignoreAllLogs()
   const [pressed, setPressed] = useState({})
@@ -44,7 +44,6 @@ function ResponsePage({route}) {
 
     )): resp;
 
-    console.log(info)
   const togglePressed = (detail) => {
     setPressed({
       ...pressed,
@@ -61,9 +60,9 @@ function ResponsePage({route}) {
   )}
 
   const renderMultiData = (item,id) => {
-    console.log("bruchacha",info, item, id, info[id][item])
+    //console.log("bruchacha",info, item, id, pressed)
     return(
-      <InfoBox isOpen={info[id][item]} title={item} style={styles.responseBoxes} onPress={()=> togglePressed(info[id][item])}>
+      <InfoBox isOpen={pressed["data" + item + id]} title={item} style={styles.responseBoxes} onPress={()=> togglePressed("data"+ item + id)}>
         
         {JSON.stringify(info[id][item], null, 2)}
       </InfoBox>
@@ -72,13 +71,12 @@ function ResponsePage({route}) {
 
   const renderDisplay = ({ item }) => {
     const id = item.id
-    console.log("yaoesunatoheu",id)
      return(
-    <InfoBox isOpen={id} title={`Response ${id}`} isDisplay style={styles.responseBoxes} onPress={()=> togglePressed(id)}>
+    <InfoBox isOpen={pressed["resp" + id]} title={`Response ${id+1}`} isDisplay style={styles.responseBoxes} onPress={()=> togglePressed("resp"+id)}>
       <FlatList 
       style={styles.list}
       data={responses} 
-      renderItem={(item) => renderMultiData(item, id - 1)} 
+      renderItem={({item}) => renderMultiData(item, id)} 
       keyExtractor={item => item}
       />  
     </InfoBox>
@@ -104,9 +102,9 @@ function ResponsePage({route}) {
                 
                 <FlatList 
                   style={styles.list}
-                  data={ligma}
+                  data={info}
                   renderItem={renderDisplay}
-                  keyExtractor={item => item.id}
+                  keyExtractor={item => "resp" + item.id}
                   />
               ) : (
                 createList()
