@@ -16,37 +16,104 @@ const responses = [
 ]
 
 
+
+
 function ResponsePage({route}) {
   LogBox.ignoreAllLogs()
   const [pressed, setPressed] = useState({})
+
   const {data, resp} = route.params
   const { status } = resp
-  
-  console.log(status)
+
+    const ligma = [
+      {
+        id: 1
+      },
+      {
+        id: 2
+      },
+    ]
+    const info = Array.isArray(resp)? resp.map( (r,index) => (
+
+      {
+        "id": index,
+        "headers": JSON.stringify(r.headers),
+        "data": JSON.stringify(r.data),
+        "config": JSON.stringify(r.config)
+      }
+
+    )): resp;
+
+    console.log(info)
   const togglePressed = (detail) => {
     setPressed({
       ...pressed,
       [detail]: !pressed[detail]
     })
   }
+  
+  const renderData = ({ item }) => {
+    return(
+      <InfoBox isOpen={pressed[item]} title={item} style={styles.responseBoxes} onPress={()=> togglePressed(item)}>
+        
+        {JSON.stringify(info[item], null, 2)}
+      </InfoBox>
+  )}
 
-  const renderData = ({ item }) => (
-    <InfoBox isOpen={pressed[item]} title={item} style={styles.responseBoxes} onPress={()=> togglePressed(item)}>
-      
-      {JSON.stringify(resp[item], null, 2)}
+  const renderMultiData = (item,id) => {
+    console.log("bruchacha",info, item, id, info[id][item])
+    return(
+      <InfoBox isOpen={info[id][item]} title={item} style={styles.responseBoxes} onPress={()=> togglePressed(info[id][item])}>
+        
+        {JSON.stringify(info[id][item], null, 2)}
+      </InfoBox>
+  )}
+
+
+  const renderDisplay = ({ item }) => {
+    const id = item.id
+    console.log("yaoesunatoheu",id)
+     return(
+    <InfoBox isOpen={id} title={`Response ${id}`} isDisplay style={styles.responseBoxes} onPress={()=> togglePressed(id)}>
+      <FlatList 
+      style={styles.list}
+      data={responses} 
+      renderItem={(item) => renderMultiData(item, id - 1)} 
+      keyExtractor={item => item}
+      />  
     </InfoBox>
+  )}
+
+  const createList = () => (
+    <FlatList 
+      style={styles.list}
+      data={responses} 
+      renderItem={renderData} 
+      keyExtractor={item => item}
+      />  
   )
+  
         return (
           <View style={[  styles.container ]}>
             <View style={styles.textContainer}>
               <AppText style={styles.text}> Status: </AppText>
               <AppText style={styles.status}>{status || "Error"}</AppText>
             </View>
-                 <FlatList 
-                 style={styles.list}
-                 data={responses} 
-                 renderItem={renderData} 
-                 keyExtractor={item => item}/>               
+            {
+              Array.isArray(info)? (
+                
+                <FlatList 
+                  style={styles.list}
+                  data={ligma}
+                  renderItem={renderDisplay}
+                  keyExtractor={item => item.id}
+                  />
+              ) : (
+                createList()
+              )
+            
+            }
+                              
 
           </View>
         );

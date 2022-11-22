@@ -43,8 +43,9 @@ const pracApi = {
             .catch(err => console.error(err))
     },
     "PUT/PATCH": (navigation, location, data) => {
-        //the id must be included in the url thats the 1
-        axios.put("https://jsonplaceholder.typicode.com/posts/1",{
+        //the id must be included in the url thats the 
+        //the difference between post and put is that put replaces the entire thing, and patch just changes the fields
+        axios.patch("https://jsonplaceholder.typicode.com/posts/1",{
             title: 'Updated Todo',
             completed: true
         })
@@ -53,12 +54,24 @@ const pracApi = {
 
     },
     "DELETE": (navigation, location, data) => {
-        console.log(data) 
-        navigation.navigate(location, data)
+        axios
+            .delete("https://jsonplaceholder.typicode.com/posts/1")
+            .then(res => navigation.navigate(location, {data, resp: res}))
+            .catch(err => console.error(err))
     },
     "Sim Request": (navigation, location, data) => {
-        console.log(data) 
-        navigation.navigate(location, data)
+        axios
+            .all([
+                axios.get("https://jsonplaceholder.typicode.com/posts?_limit=1"),
+                axios.get("https://jsonplaceholder.typicode.com/todos")
+            ])
+            .then( res => {
+                console.log(res[1])
+                res[0],
+                res[1]
+                navigation.navigate(location, {data, resp: res})
+            })
+            .catch(err => console.error(err))
     },
     "Custom Headers": (navigation, location, data) => {
         console.log(data) 

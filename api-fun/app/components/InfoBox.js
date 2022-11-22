@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { Children, useRef, useState } from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback, Animated, ScrollView } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 
@@ -6,12 +6,12 @@ import appStyles from '../config/appStyles';
 import AppText from './AppText';
 
 const radius = 10
-function InfoBox({title, children, style, isOpen, onPress, ...otherProps}) {
+function InfoBox({title, children, style, isOpen, onPress, isDisplay = false, ...otherProps}) {
     const slideAnim = useRef(new Animated.Value(0)).current
 
     const [activated, setActivated] = useState(true)
 
-
+    console.log("hi")
     const openSlide = () => {
       onPress()
       setActivated(false)
@@ -70,9 +70,7 @@ function InfoBox({title, children, style, isOpen, onPress, ...otherProps}) {
                   inputRange: [0, 1],
                   outputRange:[0, 10]
                 }) }] }>
-                    <AppText>
-                        {children}
-                    </AppText>
+                    {!isDisplay? (<AppText> {children} </AppText>) : <AppText>ligma</AppText>}
                 </Animated.ScrollView>
 
             </View>
